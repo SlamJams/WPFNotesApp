@@ -5,14 +5,15 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 using WPFNotesApp.Annotations;
 
 namespace WPFNotesApp.Model
 {
-    class User : INotifyPropertyChanged
+    public class User : INotifyPropertyChanged
     {
         private int id;
-
+        [PrimaryKey, AutoIncrement]
         public int Id
         {
             get { return id; }
@@ -24,7 +25,7 @@ namespace WPFNotesApp.Model
         }
 
         private string firstName;
-
+        [MaxLength(50)]
         public string FirstName
         {
             get { return firstName; }
@@ -36,7 +37,7 @@ namespace WPFNotesApp.Model
         }
 
         private string lastName;
-
+        [MaxLength(50)]
         public string LastName
         {
             get { return lastName; }
@@ -60,7 +61,7 @@ namespace WPFNotesApp.Model
         }
 
         private string userName;
-
+        [MaxLength(12)]
         public string UserName
         {
             get { return userName; }

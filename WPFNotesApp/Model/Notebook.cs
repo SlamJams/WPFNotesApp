@@ -4,13 +4,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SQLite;
 
 namespace WPFNotesApp.Model
 {
-    class Notebook : INotifyPropertyChanged
+    public class Notebook : INotifyPropertyChanged
     {
         private int id;
-
+        [PrimaryKey, AutoIncrement]
         public int Id
         {
             get { return id; }
@@ -34,7 +35,7 @@ namespace WPFNotesApp.Model
         }
 
         private int userId;
-
+        [Indexed]
         public int UserId
         {
             get { return userId; }
