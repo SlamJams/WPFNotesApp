@@ -10,7 +10,7 @@ namespace WPFNotesApp.ViewModel
 {
     class DatabaseRepo
     {
-        private static string dbFile = Path.Combine(Environment.CurrentDirectory, "WPFnotesDb.db3");
+        public static string dbFile = Path.Combine(Environment.CurrentDirectory, "WPFnotesDb.db3");
 
         public static bool Insert<T>(T item)
         {
