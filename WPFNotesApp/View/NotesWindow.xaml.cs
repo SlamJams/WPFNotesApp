@@ -43,6 +43,12 @@ namespace WPFNotesApp.View
             recognitionEngine.LoadGrammar(grammar);
             recognitionEngine.SetInputToDefaultAudioDevice();
             recognitionEngine.SpeechRecognized += RecognitionEngine_SpeechRecognized;
+
+            var fontFamilies = Fonts.SystemFontFamilies.OrderBy(f => f.Source);
+            fontFamilyComboBox.ItemsSource = fontFamilies;
+
+            List<double> fontSizes = new List<double>() { 8, 9, 10, 11, 12, 13, 14, 16, 18, 20, 22, 24};
+            fontSizeComboBox.ItemsSource = fontSizes;
         }
 
         private void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -98,6 +104,22 @@ namespace WPFNotesApp.View
             var selectedState = contentRichTextBox.Selection.GetPropertyValue(Inline.FontWeightProperty);
 
             boldButton.IsChecked = (selectedState != DependencyProperty.UnsetValue) && (selectedState.Equals(FontWeights.Bold));
+
+            fontFamilyComboBox.SelectedItem = contentRichTextBox.Selection.GetPropertyValue(Inline.FontFamilyProperty);
+            fontSizeComboBox.Text = (contentRichTextBox.Selection.GetPropertyValue(Inline.FontSizeProperty)).ToString();
+        }
+
+        private void fontFamilyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (fontSizeComboBox.SelectedItem != null)
+            {
+                contentRichTextBox.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, fontFamilyComboBox.SelectedItem);
+            }
+        }
+
+        private void fontSizeComboBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            contentRichTextBox.Selection.ApplyPropertyValue(Inline.FontSizeProperty, fontSizeComboBox.Text);
         }
     }
 }

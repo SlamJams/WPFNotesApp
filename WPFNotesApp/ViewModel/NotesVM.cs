@@ -41,6 +41,7 @@ namespace WPFNotesApp.ViewModel
             Notes = new ObservableCollection<Note>();
 
             ReadNotebooks();
+            ReadNotes();
         }
 
         public void CreateNote(int notebookId)
@@ -55,6 +56,8 @@ namespace WPFNotesApp.ViewModel
 
             DatabaseRepo.Insert(newNote);
 
+            ReadNotes();
+
         }
 
         public void CreateNotebook()
@@ -66,6 +69,7 @@ namespace WPFNotesApp.ViewModel
 
             DatabaseRepo.Insert(newNotebook);
 
+            ReadNotebooks();
         }
 
         public void ReadNotebooks()
